@@ -30,5 +30,11 @@ def data_cleaning(training_folders : list[str] = training_folders_names, file_na
         
     data = pd.DataFrame(data)
     data = data[data[2] == 1]
-
+    data.columns = ["file", "class", "sure", "folder name"]
     return counts, data
+
+def devide_x_y(data : pd.DataFrame) : 
+    Y = data.iloc[:,1].values
+    X = data.iloc[:, [0,2,3]].values
+
+    return X,Y
