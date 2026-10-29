@@ -38,3 +38,14 @@ def devide_x_y(data : pd.DataFrame) :
     X = data.iloc[:, [0,2,3]].values
 
     return X,Y
+
+def split_train_test(data : pd.DataFrame):
+    data_training = data[data["folder name"] != "training-e"].reset_index(drop=True)
+    data_testing = data[data["folder name"] == "training-e"].reset_index(drop=True)
+    number_class_normal = (data_training["class"] == -1).sum()
+    number_class_abnormal = (data_training["class"] == 1).sum()
+
+    print("Normal:", number_class_normal)
+    print("Abnormal:", number_class_abnormal)
+
+    return data_training, data_testing
