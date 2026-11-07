@@ -7,16 +7,19 @@ class Mil_classifier(nn.Module) :
         # signal = [[],[],[]] = 1
         super(Mil_classifier, self).__init__()
         self.conv1 = nn.Conv1d(1, 20, 100, stride=40)
-        self.bn1 = nn.BatchNorm1d(20)
+        self.bn1 = nn.GroupNorm(4, 20)
         self.pool1 = nn.MaxPool1d(15, 6)
+        self.dropout1 = nn.Dropout(p=0.3)
 
         self.conv2 = nn.Conv1d(20, 40, 5)
-        self.bn2 = nn.BatchNorm1d(40)
+        self.bn2 = nn.GroupNorm(8, 40)
         self.pool2 = nn.MaxPool1d(5, 2)
+        self.dropout2 = nn.Dropout(p=0.3)
 
         self.conv3 = nn.Conv1d(40, 20, 3, padding=1)
-        self.bn3 = nn.BatchNorm1d(20)
+        self.bn3 = nn.GroupNorm(4, 20)
         self.pool3 = nn.MaxPool1d(3, 2)
+        self.dropout3 = nn.Dropout(p=0.3)
 
         self.gap = nn.AdaptiveAvgPool1d(1)
 
@@ -32,13 +35,13 @@ class Mil_classifier(nn.Module) :
         x = x.reshape(B * N, 1, L)
 
         x = self.bn1(self.conv1(x))
-        x = self.pool1(F.relu(x))
+        x = self.pool1(self.dropout1(F.relu(x)))
 
-        x = self.bn2(self.conv2(x))
-        x = self.pool2(F.relu(x))
+        x = self.bn2((self.conv2(x)))
+        x = self.pool2(self.dropout2(F.relu(x)))
 
         x = self.bn3(self.conv3(x))
-        x = self.pool3(F.relu(x))
+        x = self.pool3(self.dropout3(F.relu(x)))
 
         x = self.gap(x).squeeze(-1)
         x = F.relu(self.fc1(x))
