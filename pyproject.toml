@@ -14,5 +14,6 @@ packages = [
     "Dataset", 
     "Base_line", 
     "Optimisation", 
-    "Data_pre_processing"
+    "Data_pre_processing",
+    "Training",
 ]

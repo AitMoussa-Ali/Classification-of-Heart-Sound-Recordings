@@ -1,5 +1,11 @@
 pyproject.toml
+Data_pre_processing/Build_dataset.py
+Data_pre_processing/Data_pipeline.py
+Data_pre_processing/Signal_treatement.py
 Data_pre_processing/data_cleaning.py
+Models/MIL1D.py
+Training/Early_stopping.py
+Training/Train_model.py
 heart_desease_detection.egg-info/PKG-INFO
 heart_desease_detection.egg-info/SOURCES.txt
 heart_desease_detection.egg-info/dependency_links.txt
