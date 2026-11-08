@@ -27,7 +27,7 @@ def build_data_loaders(dataset, train_index, test_index):
   train_loader = DataLoader(
       training_dataset,
       batch_size=1,
-      # shuffle=True
+      shuffle=False
   )
   #Building the validation loader
   valid_loader = DataLoader(
