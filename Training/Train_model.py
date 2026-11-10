@@ -46,13 +46,13 @@ class TrainModel():
             self.optimizer.zero_grad()
     
             output = self.model(bag)
-            logit = output.mean(dim=0)
+            logit = output
             proba = torch.sigmoid(logit).item()
-            all_probs.append(proba)
 
+            all_probs.append(proba)
             loss = self.criterion(
                 logit,
-                label.float().reshape_as(logit)
+                label.unsqueeze(0)
             )
             loss.backward()
     
@@ -76,14 +76,14 @@ class TrainModel():
                 label = label.to(self.device).reshape(())
                 bag = bag.squeeze(0).unsqueeze(1).to(self.device)
                 output = self.model(bag)
-                logit = output.mean(dim=0)
+                logit = output
                 proba = torch.sigmoid(logit).item()
                 all_probs.append(proba)
                 all_labels.append(int(label.item()))
 
                 loss = self.criterion(
                   logit,
-                  label.float().reshape_as(logit)
+                  label.unsqueeze(0).float()
                 )
 
                 total_valid_loss += loss.item()

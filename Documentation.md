@@ -39,5 +39,6 @@ TimeMIL proposed another architecture, and that by replacing the pooling phase b
 The positional encoding they used in this approach, is not like the positional encoding used in LLM's, the key difference is that : 
 
 **- Positional encoding in classical transformers** is predefined and not learnable, it's generated out of the input context, so it can't capture both time and frequency information.
-**- Wavelet positional encoding** is a learnable positional encoding with a conditional positional encoding
+
+**- Wavelet positional encoding** is a learnable positional encoding with a conditional positional encoding fashion. 
 

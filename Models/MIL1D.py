@@ -23,8 +23,8 @@ class Mil_classifier(nn.Module) :
 
         self.gap = nn.AdaptiveAvgPool1d(1)
 
-        self.fc1 = nn.Linear(20, 10)
-        self.fc2 = nn.Linear(10,1)
+        self.fc1 = nn.Linear(20, 40)
+        self.fc2 = nn.Linear(40,1)
 
     def forward(self, x : torch.tensor):
         # Input: [B, N, L]
@@ -44,11 +44,12 @@ class Mil_classifier(nn.Module) :
         x = self.pool3(self.dropout3(F.relu(x)))
 
         x = self.gap(x).squeeze(-1)
+
+        x = x.mean(dim = 0)
         x = F.relu(self.fc1(x))
 
         
         x = self.fc2(x)
-        x = x.reshape(B, N)
 
         return x
 

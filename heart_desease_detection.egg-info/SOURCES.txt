@@ -4,6 +4,7 @@ Data_pre_processing/Data_pipeline.py
 Data_pre_processing/Signal_treatement.py
 Data_pre_processing/data_cleaning.py
 Models/MIL1D.py
+Tracking/mlflow_config.py
 Training/Early_stopping.py
 Training/Train_model.py
 heart_desease_detection.egg-info/PKG-INFO
