@@ -11,9 +11,11 @@
 - We repeat this process to all the segments of the signal, at the end we take the mean probability as an MIL output so we can classify the entire signal.
 
 **Problems**:
-
+- The architecture is not really relevant, because i'm not doing an agreagation for the extracted features. 
 - We are dealing with time series data, so the thing is that the order of the series may introduce more information for feature extraction and classification.
-So what we need to do is to figure out a way to add information about the positions of each segment, so we can introduce more information for the classification purpose
+So what we need to do is to figure out a way to add information about the positions of each segment, so we can introduce more information for the classification purpose.
+
+
 # What my professor suggusted to include to improve the results ? 
 - Include an attention mechanism instead of an agregation to classify the signals
 - Explore CNN architecture but with different kernel size to capture more complex patterns
