@@ -30,9 +30,14 @@ So what we need to do is to figure out a way to add information about the positi
 # Summary of the lectures : 
 ## **TimeMIL: Advancing Multivariate Time Series Classification via a Time-aware Multiple Instance Learning : based on time series analysis using multiple instance learning** : 
 
-    - It's uses an MIL approach based on CNN for feature extraction, and a time-aware transformer.
-    - The paper focusd on MTSC (Multivariate Time Series Classification)
-    - The architecture has three princpal components :
-        - Feature extractor (InceptionTime model based on a CNN for time-series classification)
-        - Time-aware MIL pooling
-        - Bag-level classifier
+The TimeMIL is an architecture based on the strandard MIL. 
+
+MIL uses a CNN as a feature extractor for each segment of the signal, at the end we are going to have a vector of 128 features by applying a max pooling or mean pooling. After features extraction, we feed the vector of features into an MLP to classify the entire signal, and not each segment. 
+
+TimeMIL proposed another architecture, and that by replacing the pooling phase by an attention layer, add a cls token to capture all the seqeunce, and add a positional encoding to encode the position of each segment so it can help the attention layer to capture the temporal features and relations.
+
+The positional encoding they used in this approach, is not like the positional encoding used in LLM's, the key difference is that : 
+
+**- Positional encoding in classical transformers** is predefined and not learnable, it's generated out of the input context, so it can't capture both time and frequency information.
+**- Wavelet positional encoding** is a learnable positional encoding with a conditional positional encoding
+
